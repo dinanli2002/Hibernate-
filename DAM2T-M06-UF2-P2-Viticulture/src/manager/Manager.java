@@ -42,6 +42,7 @@ public class Manager {
 		getEntrada();
 		manageActions();
 		showAllCampos();
+		showCantidadVidByTipo();
 		session.close();
 	}
 
@@ -133,5 +134,24 @@ public class Manager {
 		tx.commit();
 	}
 
-	
+	private void showCantidadVidByTipo() {
+		tx = session.beginTransaction();
+		String hql = "select v.vid, sum(v.cantidad) " +
+	            "from Vid v group by v.vid";
+	    Query<Object[]> query = session.createQuery(hql, Object[].class);
+	    List<Object[]> results = query.getResultList();
+	    int sumTipoVidBlanca = 0;
+	    int sumTipoVidNegra = 0;
+	    for (Object[] result : results) {
+	    	TipoVid tipoVid = (TipoVid) result[0];
+	        int totalCantidad = ((Number) result[1]).intValue();
+	        if (tipoVid == TipoVid.BLANCA) {
+	            sumTipoVidBlanca += totalCantidad;
+	        } else if (tipoVid == TipoVid.NEGRA) {
+	            sumTipoVidNegra += totalCantidad;
+	        }
+	    }
+	    System.out.println("Sum of cantidad where tipo_vid is BLANCA: " + sumTipoVidBlanca);
+	    System.out.println("Sum of cantidad where tipo_vid is NEGRA: " + sumTipoVidNegra);
+	}
 }
