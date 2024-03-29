@@ -20,6 +20,9 @@ public class Campo {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = true)
 	private int id_campo;
+	
+	@Column(name = "nombre")
+    private String nombre;
 
 	@OneToMany
     @JoinColumn(name = "campo_id")
@@ -29,17 +32,19 @@ public class Campo {
 	@JoinColumn(name = "id_bodega")
 	private Bodega bodega;
 	
+	
 	public Campo() {}
 
-	public Campo(Bodega b) {
+	public Campo(Bodega b, String nombre) {
 		this.bodega = b;
+		this.nombre = nombre;
 		this.vids = new ArrayList<>();
 	}
 
 	@Override
 	public String toString() {
-		return "Campo [id_campo=" + id_campo + ", vids=" + Arrays.toString(vids.toArray()) + ", bodega="
-				+ bodega.toString() + "]";
+		return "Campo [id_campo=" + id_campo + " nombre=" + nombre +", vids=" + Arrays.toString(vids.toArray()) + ", bodega="
+	            + bodega.toString() + "]";
 	}
 
 	public void addVid(Vid v) {
@@ -51,4 +56,5 @@ public class Campo {
 		vids.addAll(this.vids);
 		return vids;
 	}
+	
 }

@@ -1,6 +1,7 @@
 package manager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -97,9 +98,9 @@ public class Manager {
 	}
 
 	private void addCampo(String[] split) {
-		c = new Campo(b);
+		String nombre = String.join(" ", Arrays.copyOfRange(split, 1, split.length));
+		c = new Campo(b, nombre);
 		tx = session.beginTransaction();
-		
 		int id = (Integer) session.save(c);
 		c = session.get(Campo.class, id);
 		
@@ -136,8 +137,7 @@ public class Manager {
 
 	private void showCantidadVidByTipo() {
 		tx = session.beginTransaction();
-		String hql = "select v.vid, sum(v.cantidad) " +
-	            "from Vid v group by v.vid";
+		String hql = "select v.vid, sum(v.cantidad)" + "from Vid v group by v.vid";
 	    Query<Object[]> query = session.createQuery(hql, Object[].class);
 	    List<Object[]> results = query.getResultList();
 	    int sumTipoVidBlanca = 0;
