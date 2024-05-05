@@ -21,6 +21,26 @@ public class Bodega {
 	@Column(name = "id", unique = true, nullable = true)
 	private int id_bodega;
 	
+	public int getId_bodega() {
+		return id_bodega;
+	}
+
+	public void setId_bodega(int id_bodega) {
+		this.id_bodega = id_bodega;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setVids(List<Vid> vids) {
+		this.vids = vids;
+	}
+
 	@Column(name = "nombre")
 	private String nombre;
 	

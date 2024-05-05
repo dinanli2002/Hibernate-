@@ -41,6 +41,34 @@ public class Campo {
 		this.vids = new ArrayList<>();
 	}
 
+	public int getId_campo() {
+		return id_campo;
+	}
+
+	public void setId_campo(int id_campo) {
+		this.id_campo = id_campo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Bodega getBodega() {
+		return bodega;
+	}
+
+	public void setBodega(Bodega bodega) {
+		this.bodega = bodega;
+	}
+
+	public void setVids(List<Vid> vids) {
+		this.vids = vids;
+	}
+
 	@Override
 	public String toString() {
 		return "Campo [id_campo=" + id_campo + " nombre=" + nombre +", vids=" + Arrays.toString(vids.toArray()) + ", bodega="
